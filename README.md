@@ -4,34 +4,73 @@
 2. Github Workflow
 3. Iam User In AWS
 
-## Docker Setup In EC2 commands to be Executed
+## 1. Login to AWS console.
 
-#optinal
+## 2. Create IAM user for deployment
 
-sudo apt-get update -y
+	#with specific access
 
-sudo apt-get upgrade
+	1. EC2 access : It is virtual machine
 
-#required
+	2. ECR: Elastic Container registry to save your docker image in aws
 
-curl -fsSL https://get.docker.com -o get-docker.sh
 
-sudo sh get-docker.sh
+	#Description: About the deployment
 
-sudo usermod -aG docker ubuntu
+	1. Build docker image of the source code
 
-newgrp docker
+	2. Push your docker image to ECR
 
-## Configure EC2 as self-hosted runner:
+	3. Launch Your EC2 
 
-## Setup github secrets:
+	4. Pull Your image from ECR in EC2
 
-AWS_ACCESS_KEY_ID=
+	5. Lauch your docker image in EC2
 
-AWS_SECRET_ACCESS_KEY=
+	#Policy:
 
-AWS_REGION = us-east-1
+	1. AmazonEC2ContainerRegistryFullAccess
 
-AWS_ECR_LOGIN_URI = demo>>  566326532215.dkr.ecr.ap-south-1.amazonaws.com
+	2. AmazonEC2FullAccess
 
-ECR_REPOSITORY_NAME = simple-app
+	
+## 3. Create ECR repo to store/save docker image
+    - Save the URI: 315865595366.dkr.ecr.us-east-1.amazonaws.com/simple-app
+
+	
+## 4. Create EC2 machine (Ubuntu) 
+
+## 5. Open EC2 and Install docker in EC2 Machine:
+	
+	
+	#optinal
+
+	sudo apt-get update -y
+
+	sudo apt-get upgrade
+	
+	#required
+
+	curl -fsSL https://get.docker.com -o get-docker.sh
+
+	sudo sh get-docker.sh
+
+	sudo usermod -aG docker ubuntu
+
+	newgrp docker
+	
+# 6. Configure EC2 as self-hosted runner:
+    setting>actions>runner>new self hosted runner> choose os> then run command one by one
+
+
+# 7. Setup github secrets:
+
+    AWS_ACCESS_KEY_ID=
+
+    AWS_SECRET_ACCESS_KEY=
+
+    AWS_REGION = us-east-1
+
+    AWS_ECR_LOGIN_URI = demo>>  566373416292.dkr.ecr.ap-south-1.amazonaws.com
+
+    ECR_REPOSITORY_NAME = simple-app
